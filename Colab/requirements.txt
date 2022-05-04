@@ -7,8 +7,7 @@ seaborn
 textblob
 keras
 nltk
-spacy
+spacy --upgrade
 requests
 tensorflow
-spacy-streamlit
 

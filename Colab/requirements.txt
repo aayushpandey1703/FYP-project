@@ -9,5 +9,4 @@ keras
 nltk
 spacy
 requests
-json
 tensorflow

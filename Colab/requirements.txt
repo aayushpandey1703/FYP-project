@@ -10,3 +10,4 @@ nltk
 spacy
 requests
 tensorflow
+en_core_web_sm

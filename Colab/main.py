@@ -24,7 +24,7 @@ consumer_key='vtpCktz8FTXUKEqbrmQyfitZ2'
 consumer_secret='FDbBJ3gTQPvv2lA9jT23DDbnDJipV4NjmfEZMobi8Xl7zJO2L1'
 access_token='1287085799339462656-yMJ0c9NzCgbwu7sd9QEVjyXUKkWieS'
 access_token_secret='OPq0IiDTyGmhziS0EUNyYbupdr492tuB848rtGT8BxzLS'
-
+#load model
 file_to_read = open("Colab/stored_object.pickle", "rb")
 z=pickle.load(file_to_read)
 t=Tokenizer(num_words=50000,lower=True)
@@ -36,8 +36,15 @@ model=keras.models.load_model("Colab/my_model.h5")
 
 st.set_page_config(layout="wide",menu_items=None)
 
-def tweet_scrape(num_tweets):         # scraped tweets
-
+def tweet_scrape(num_tweets,option): 
+  try:
+    option=option.split(" ")
+    option=option[:2]
+    option=" ".join(option)
+  except:
+    option=option
+  text=st.markdown("<html><body><h4>Scrapping tweets ...</h4></body></html>", unsafe_allow_html=True)
+          # scraped tweets
   bearer_token='AAAAAAAAAAAAAAAAAAAAAJbiNgEAAAAA9XfDS3YRCsEWv9GoitFHFTCuu9I%3DFdYzAbd2GvMgStnVTDVlnD1TVMARk4w306nGUt9YHNoT2AkUPQ'
   client=tweepy.Client(bearer_token=bearer_token)
   tweetDf={'data':[],'users':[]}
@@ -51,6 +58,7 @@ def tweet_scrape(num_tweets):         # scraped tweets
     tweets=client.search_recent_tweets(query=query,tweet_fields=tweet_fields,expansions=['author_id'],max_results=100) 
     tweetDf['data']=tweets.data
     since_id=tweetDf['data'][-1].id
+    y=z
     
     for i in range(num_tweets-1):
       tweets=client.search_recent_tweets(query=query,tweet_fields=tweet_fields,expansions=['author_id'],since_id=since_id,max_results=100)      
@@ -64,9 +72,10 @@ def tweet_scrape(num_tweets):         # scraped tweets
         getUser(ids[100*i:100*i+100])
       except:
         getUser(ids[500:len(ids)])
+    text.empty()
     return tweetDf
 
-  query="i want to buy iphone -is:retweet OR i hate iphone -is:retweet OR i love iphone -is:retweet"
+  query="i want "+option+" -is:retweet OR i hate "+option+" -is:retweet OR i love "+option+" -is:retweet OR i wish for "+option+" -is:retweet"
   tweet_fields=['text','author_id','created_at','lang']
   json_response=search_twitter(query=query, tweet_fields=tweet_fields,bearer_token=bearer_token)
   return json_response
@@ -106,6 +115,10 @@ def tweet_df(json_response):
 
 def final_tweet_df(tweetDf):
   coor={'geometry':[],'address':[]}
+  head=coly3.markdown("<html><body><h3>Loading Locations ...</h3></body></html>", unsafe_allow_html=True)
+  my_bar = coly3.progress(0)
+  z=len(tweetDf)//100
+  y=0
   for i in tweetDf.location:
     if i=="":
       coor['geometry'].append(None)
@@ -114,10 +127,15 @@ def final_tweet_df(tweetDf):
       a=gpd.tools.geocode(i, provider='nominatim',timeout=100, user_agent="http")
       coor['geometry'].append(a['geometry'][0])
       coor['address'].append(a['address'][0])
-      
+    y+=z
+    y=min(y,100)
+    my_bar.progress(y)
+
 
   a=pd.DataFrame(coor)
   final_data=pd.concat([tweetDf,a],axis=1)
+  my_bar.empty()
+  head.empty()
   return final_data
 
 def preprocess(text):
@@ -157,10 +175,13 @@ def preprocess(text):
   for token in doc:
     if token.is_currency!=True and token.ent_type_!="MONEY" and token.is_punct!=True:
       text+=" "+str(token)
-    
   return text
   
 def predict(finalDf,tweetDf):
+  text=st.markdown("<html><body><h4>predicting results ...</h4></body></html>", unsafe_allow_html=True)
+  bar=st.progress(0)
+  z=100/len(finalDf)
+  y=0
   aa=finalDf
   aa=pd.Series(aa.tweet.values).to_dict()
   a=[]
@@ -180,10 +201,14 @@ def predict(finalDf,tweetDf):
 
     else:
       a.append('no')
+    y=min(int((i)*z),100)
+    bar.progress(y)
      
   x=a.count('yes')
   y=a.count('no')
   predictDf=pd.DataFrame(k)
+  text.empty()
+  bar.empty()
   return [x,y],predictDf
 
 
@@ -229,18 +254,18 @@ st.title("Twitter Sentiment Analyser")
 
 
 col1,col2 = st.columns(2)
-
 option = col1.selectbox(
      'Select Brand Name',
-     ('Iphone', 'Samsung', 'Xiaomi'))
+     ('iphone 11', 'Samsung galaxy s20'))
 col1.title("Brand Info")
-num_tweets= col2.select_slider('Select number of tweets: ',options=['1', '2', '3', '4', '5', '6', '7'])
-json_response=tweet_scrape(int(num_tweets))
-st.write(len(json_response['users']))
+num_tweets= col2.select_slider('Select number of tweets: ',options=['100', '200', '300', '400', '500', '600', '700'])
+json_response=tweet_scrape(int(num_tweets)//100,option)
 tweetDf=tweet_df(json_response)
 
-finalDf=final_tweet_df(tweetDf)
+finalDf=tweetDf
+text2=st.markdown("<html><body><h4>Preprocessing tweets ...</h4></body></html>", unsafe_allow_html=True)  
 finalDf['tweet']=finalDf['tweet'].apply(preprocess)
+text2.empty()
 result,k=predict(finalDf,tweetDf)
 
 
@@ -252,8 +277,8 @@ col2.title("Data Frame")
 colx3.write(tweetDf[['username','tweet','location']])
 colx4.write(k)
 
-title = st.text_input('Text', '')
-if st.button('Submit'):
+title = st.text_input('send message via Twitter', option+' available at discounted price on Amazon and Flipkart, Grab the offer now!')
+if st.button('send message to '+str(len(k))+" users"):
      count=send_msg(k,title)
      st.success("Message successfully sent to "+str(count)+" interested users")
 
@@ -268,16 +293,16 @@ sizes =[result[0],result[1]]
 explode = (0.1, 0)
 coly1.write('Pie Chart')
 fig1, ax1 = plt.subplots()
-fig1.set_facecolor('#0D1117')
+fig1.set_facecolor("#292b2a")
 ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-        shadow=True, startangle=90,textprops={'color':"black"})
+        shadow=True, startangle=90,textprops={'color':"#242321"})
 ax1.axis('equal')
 
 
 
 coly1.pyplot(fig1)
 coly3.write('Map data')
-
+finalDf=final_tweet_df(tweetDf)
 d={'latitude':[],'longitude':[]}
 for i in finalDf['geometry']:
   if str(i)[0]=='P':

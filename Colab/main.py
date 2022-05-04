@@ -278,8 +278,8 @@ col2.title("Data Frame")
 colx3.write(tweetDf[['username','tweet','location']])
 colx4.write(k)
 
-title = st.text_input('send message via Twitter', option+' available at discounted price on Amazon and Flipkart, Grab the offer now!')
-if st.button('send message to '+str(len(k))+" users"):
+title = st.text_input('Send message via Twitter', option+' available at discounted price on Amazon and Flipkart, Grab the offer now!')
+if st.button('Send message to '+str(len(k))+" interested users"):
      count=send_msg(k,title)
      st.success("Message successfully sent to "+str(count)+" interested users")
 

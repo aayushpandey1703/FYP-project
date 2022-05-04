@@ -111,7 +111,7 @@ def final_tweet_df(tweetDf):
       coor['geometry'].append(None)
       coor['address'].append(None)
     else:
-      a=gpd.tools.geocode(i, provider='nominatim',timeout=100, user_agent="my-application")
+      a=gpd.tools.geocode(i, provider='nominatim',timeout=100, user_agent="http")
       coor['geometry'].append(a['geometry'][0])
       coor['address'].append(a['address'][0])
       

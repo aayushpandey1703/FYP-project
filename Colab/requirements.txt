@@ -2,7 +2,7 @@ streamlit
 geopandas
 tweepy
 pandas
-numpy
+numpy==1.21.6
 re
 matplotlib
 seaborn 
@@ -13,5 +13,3 @@ spacy
 requests
 json
 tensorflow
-
-

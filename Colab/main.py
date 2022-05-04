@@ -117,9 +117,11 @@ def final_tweet_df(tweetDf):
   coor={'geometry':[],'address':[]}
   head=coly3.markdown("<html><body><h3>Loading Locations ...</h3></body></html>", unsafe_allow_html=True)
   my_bar = coly3.progress(0)
-  z=len(tweetDf)//100
+  z=100/len(tweetDf)
   y=0
+  k=0
   for i in tweetDf.location:
+    k+=1
     if i=="":
       coor['geometry'].append(None)
       coor['address'].append(None)
@@ -127,8 +129,7 @@ def final_tweet_df(tweetDf):
       a=gpd.tools.geocode(i, provider='nominatim',timeout=100, user_agent="http")
       coor['geometry'].append(a['geometry'][0])
       coor['address'].append(a['address'][0])
-    y+=z
-    y=min(y,100)
+    y=min(int((k)*z),100)
     my_bar.progress(y)
 
 

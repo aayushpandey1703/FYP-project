@@ -1,8 +1,7 @@
 streamlit
 geopandas
 tweepy
-pandas
-numpy==1.21.6
+scipy
 re
 matplotlib
 seaborn 

@@ -1,0 +1,17 @@
+streamlit
+geopandas
+tweepy
+pandas
+numpy
+re
+matplotlib
+seaborn 
+textblob
+keras
+nltk
+spacy
+requests
+json
+tensorflow
+
+

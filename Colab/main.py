@@ -285,7 +285,7 @@ if st.button('Send message to '+str(len(k))+" interested users"):
      count=send_msg(k,title)
      st.success("Message successfully sent to "+str(count)+" interested users")
 
-coly1,coly2,coly3=st.columns(3)
+coly1,coly3=st.columns(2)
 chart_data = pd.DataFrame(
      np.random.randn(50, 2),
      columns=["a", "b"])

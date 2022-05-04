@@ -271,7 +271,10 @@ result,k=predict(finalDf,tweetDf)
 
 
 colx1,colx2,colx3,colx4=st.columns(4)
-colx1.image("https://media.wired.com/photos/5bcea2642eea7906bba84c67/master/w_2560%2Cc_limit/iphonexr.jpg")
+if option=='iphone 11': 
+  colx1.image("https://media.wired.com/photos/5bcea2642eea7906bba84c67/master/w_2560%2Cc_limit/iphonexr.jpg",width=300)
+else :
+  colx1.image("https://m.media-amazon.com/images/I/71IX75joWjL._AC_SL1500_.jpg",width=300)
 
 col2.title("Data Frame")
 colx3.write(tweetDf[['username','tweet','location']])

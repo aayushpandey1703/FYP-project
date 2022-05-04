@@ -272,7 +272,7 @@ result,k=predict(finalDf,tweetDf)
 
 colx1,colx2,colx3,colx4=st.columns(4)
 if option=='iphone 11': 
-  colx1.image("https://i.ibb.co/wMHhsT2/71w3o-J7a-Wy-L-SX679-Photo-Room.png",width=300)
+  colx1.image("https://media.wired.com/photos/5bcea2642eea7906bba84c67/master/w_2560%2Cc_limit/iphonexr.jpg",width=300)
 else :
   colx1.image("https://i.ibb.co/7pH96cC/71-IX75jo-Wj-L-AC-SL1500-removebg.png",width=300)
 

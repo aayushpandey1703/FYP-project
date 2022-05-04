@@ -293,7 +293,7 @@ sizes =[result[0],result[1]]
 explode = (0.1, 0)
 coly1.write('Pie Chart')
 fig1, ax1 = plt.subplots()
-fig1.set_facecolor("#292b2a")
+fig1.set_facecolor("#0D1117")
 ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
         shadow=True, startangle=90,textprops={'color':"#242321"})
 ax1.axis('equal')

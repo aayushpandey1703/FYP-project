@@ -33,7 +33,7 @@ x=t.texts_to_sequences(z)
 x=sequence.pad_sequences(x,maxlen=250)
 model=keras.models.load_model("Colab/my_model.h5")
 
-im = Image.open("Colab/Twitter-icon-removebg-preview.png")
+im = Image.open("Twitter-icon-removebg-preview.ico")
 st.set_page_config(layout="wide",menu_items=None,page_icon=im)
 
 def tweet_scrape(num_tweets,option): 

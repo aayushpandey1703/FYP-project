@@ -26,7 +26,7 @@ access_token='1287085799339462656-yMJ0c9NzCgbwu7sd9QEVjyXUKkWieS'
 access_token_secret='OPq0IiDTyGmhziS0EUNyYbupdr492tuB848rtGT8BxzLS'
 
 #load model
-with open('https://www.transfernow.net/dl/20220504MdDdC8RZ', 'rb') as f:
+with open('https://storage-prod-ap-southeast-1-i.transfernow.net/files/2022-05-04%2F8f8083b34dd80bc3a66d99b3fe43ff7a%2F20220504MdDdC8RZ%2FJPhnk8%2Fstored_object.pickle?fileName=stored_object.pickle&bucketName=tnow-prod-ap-southeast-1-3&size=145317&singleFile=true', 'rb') as f:
     file_to_read = pickle.load(f)
 z=pickle.load(file_to_read)
 t=Tokenizer(num_words=50000,lower=True)

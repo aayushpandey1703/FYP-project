@@ -33,8 +33,8 @@ x=t.texts_to_sequences(z)
 x=sequence.pad_sequences(x,maxlen=250)
 model=keras.models.load_model("Colab/my_model.h5")
 
-
-st.set_page_config(layout="wide",menu_items=None)
+im = Image.open("Twitter-icon-removebg-preview.png")
+st.set_page_config(layout="wide",menu_items=None,page_icon=im)
 
 def tweet_scrape(num_tweets,option): 
   try:
@@ -296,7 +296,7 @@ coly1.write('Pie Chart')
 fig1, ax1 = plt.subplots()
 fig1.set_facecolor("#0D1117")
 ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-        shadow=True, startangle=90,textprops={'color':"#242321"})
+        shadow=True, startangle=90,textprops={'color':"white"})
 ax1.axis('equal')
 
 

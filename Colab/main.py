@@ -26,13 +26,13 @@ access_token='1287085799339462656-yMJ0c9NzCgbwu7sd9QEVjyXUKkWieS'
 access_token_secret='OPq0IiDTyGmhziS0EUNyYbupdr492tuB848rtGT8BxzLS'
 
 #load model
-file_to_read = open("/content/drive/MyDrive/FYP/stored_object.pickle", "rb")
+file_to_read = open("https://github.com/aayushpandey1703/fyp-project/blob/main/Colab/stored_object.pickle", "rb")
 z=pickle.load(file_to_read)
 t=Tokenizer(num_words=50000,lower=True)
 t.fit_on_texts(z)
 x=t.texts_to_sequences(z)
 x=sequence.pad_sequences(x,maxlen=250)
-model=keras.models.load_model("/content/drive/MyDrive/FYP/my_model.h5")
+model=keras.models.load_model("https://github.com/aayushpandey1703/fyp-project/blob/main/Colab/my_model.h5")
 
 
 st.set_page_config(layout="wide",menu_items=None)

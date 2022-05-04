@@ -25,9 +25,7 @@ consumer_secret='FDbBJ3gTQPvv2lA9jT23DDbnDJipV4NjmfEZMobi8Xl7zJO2L1'
 access_token='1287085799339462656-yMJ0c9NzCgbwu7sd9QEVjyXUKkWieS'
 access_token_secret='OPq0IiDTyGmhziS0EUNyYbupdr492tuB848rtGT8BxzLS'
 
-#load model
-with open('Colab/stored_object.pickle', 'rb') as f:
-    file_to_read = pickle.load(f)
+file_to_read = open("Colab/stored_object.pickle", "rb")
 z=pickle.load(file_to_read)
 t=Tokenizer(num_words=50000,lower=True)
 t.fit_on_texts(z)

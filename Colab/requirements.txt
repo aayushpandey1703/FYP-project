@@ -90,8 +90,6 @@ flatbuffers==2.0
 folium==0.8.3
 future==0.16.0
 gast==0.5.3
-GDAL==2.2.2
-gdown==4.4.0
 gensim==3.6.0
 geographiclib==1.52
 geopandas==0.10.2
@@ -180,7 +178,6 @@ librosa==0.8.1
 lightgbm==2.2.3
 llvmlite==0.34.0
 lmdb==0.99
-LunarCalendar==0.0.9
 lxml==4.2.6
 Markdown==3.3.6
 MarkupSafe==2.0.1

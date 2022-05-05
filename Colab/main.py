@@ -250,7 +250,7 @@ def send_msg(k,msg):
       continue
   return count
 
-st.title("Twitter Sentiment Analyser")
+st.title("Purchase Intention Analyzer")
 
 
 col1,col2 = st.columns(2)
@@ -276,7 +276,7 @@ if option=='iphone 11':
 else :
   colx1.image("https://i.ibb.co/7pH96cC/71-IX75jo-Wj-L-AC-SL1500-removebg.png",width=300)
 
-col2.title("Data Frame")
+col2.title("Scrapped Tweets       Positive Tweets")
 colx3.write(tweetDf[['username','tweet','location']])
 colx4.write(k)
 

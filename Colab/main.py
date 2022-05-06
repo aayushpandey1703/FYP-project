@@ -276,7 +276,7 @@ if option=='iphone 11':
 else :
   colx1.image("https://i.ibb.co/7pH96cC/71-IX75jo-Wj-L-AC-SL1500-removebg.png",width=300)
 
-col2.title("DataFrame")
+col2.title("DataFrame", 297)
 colx3.write(tweetDf[['username','tweet','location']])
 colx4.write(k)
 

@@ -257,7 +257,7 @@ col1,col2 = st.columns(2)
 option = col1.selectbox(
      'Select Brand Name',
      ('iphone 11', 'Samsung galaxy s20'))
-col1.title("Brand Info")
+col1.title("Product")
 num_tweets= col2.select_slider('Select number of tweets: ',options=['100', '200', '300', '400', '500', '600', '700'])
 json_response=tweet_scrape(int(num_tweets)//100,option)
 tweetDf=tweet_df(json_response)
@@ -276,7 +276,7 @@ if option=='iphone 11':
 else :
   colx1.image("https://i.ibb.co/7pH96cC/71-IX75jo-Wj-L-AC-SL1500-removebg.png",width=300)
 
-col2.title("Scrapped Tweets    Positive tweets")
+col2.title("DataFrame")
 colx3.write(tweetDf[['username','tweet','location']])
 colx4.write(k)
 
